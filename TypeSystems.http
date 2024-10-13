@@ -1,6 +1,6 @@
 @TypeSystems_HostAddress = http://localhost:5008
 
-GET {{TypeSystems_HostAddress}}/weatherforecast/
+GET {{TypeSystems_HostAddress}}/user/
 Accept: application/json
 
 ###
