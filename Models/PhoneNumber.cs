@@ -5,17 +5,20 @@ namespace TypeSystems
     public class PhoneNumber
     {
         private static readonly PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.GetInstance();
-        public readonly string OriginalPhoneNumber;
         private PhoneNumbers.PhoneNumber? _parsedPhoneNumber;
+
+        public readonly string? OriginalPhoneNumber = string.Empty;
         public readonly Exception? ParsingException;
+
+        public bool IsEmpty => OriginalPhoneNumber == null;
+        public bool IsValid => _parsedPhoneNumber != null && phoneNumberUtil.IsValidNumber(_parsedPhoneNumber);
 
         public PhoneNumber()
         {
-            OriginalPhoneNumber = string.Empty;
             ParsingException = new NumberParseException(ErrorType.NOT_A_NUMBER, "Phone number is empty");
         }
 
-        public PhoneNumber(string phoneNumber)
+        public PhoneNumber(string? phoneNumber)
         {
             OriginalPhoneNumber = phoneNumber;
             try
@@ -30,8 +33,10 @@ namespace TypeSystems
 
         public override string ToString() => _parsedPhoneNumber switch
         {
-            null => OriginalPhoneNumber,
-            _ => phoneNumberUtil.Format(_parsedPhoneNumber, PhoneNumberFormat.INTERNATIONAL)
+            null => OriginalPhoneNumber ?? string.Empty,
+            _ => IsValid
+                ? phoneNumberUtil.Format(_parsedPhoneNumber, PhoneNumberFormat.INTERNATIONAL)
+                : OriginalPhoneNumber ?? string.Empty
         };
 
         public override bool Equals(object? obj) => obj is PhoneNumber phoneNumber && ToString() == phoneNumber.ToString();
