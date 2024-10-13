@@ -8,10 +8,10 @@ namespace TypeSystems
         private PhoneNumbers.PhoneNumber? _parsedPhoneNumber;
 
         public readonly string? OriginalPhoneNumber = string.Empty;
-        public readonly Exception? ParsingException;
+        public readonly NumberParseException? ParsingException;
 
         public bool IsEmpty => OriginalPhoneNumber == null;
-        public bool IsValid => _parsedPhoneNumber != null && phoneNumberUtil.IsValidNumber(_parsedPhoneNumber);
+        public bool IsValid => _parsedPhoneNumber != null && ParsingException is not null && phoneNumberUtil.IsValidNumber(_parsedPhoneNumber);
 
         public PhoneNumber()
         {
