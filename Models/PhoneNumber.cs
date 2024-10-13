@@ -33,5 +33,8 @@ namespace TypeSystems
             null => OriginalPhoneNumber,
             _ => phoneNumberUtil.Format(_parsedPhoneNumber, PhoneNumberFormat.INTERNATIONAL)
         };
+
+        public override bool Equals(object? obj) => obj is PhoneNumber phoneNumber && ToString() == phoneNumber.ToString();
+        public override int GetHashCode() => ToString().GetHashCode();
     }
 }
