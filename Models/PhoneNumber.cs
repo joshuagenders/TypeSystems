@@ -5,7 +5,7 @@ namespace TypeSystems.Models;
 public class PhoneNumber
 {
     private static readonly PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.GetInstance();
-    private PhoneNumbers.PhoneNumber? _parsedPhoneNumber;
+    private readonly PhoneNumbers.PhoneNumber? _parsedPhoneNumber;
 
     public readonly string? OriginalPhoneNumber = string.Empty;
     public readonly NumberParseException? ParsingException;
