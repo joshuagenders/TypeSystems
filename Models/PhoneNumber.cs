@@ -28,9 +28,10 @@ namespace TypeSystems
             }
         }
 
-        public override string ToString()
+        public override string ToString() => _parsedPhoneNumber switch
         {
-            return _parsedPhoneNumber is not null ? phoneNumberUtil.Format(_parsedPhoneNumber, PhoneNumberFormat.INTERNATIONAL) : OriginalPhoneNumber;
-        }
+            null => OriginalPhoneNumber,
+            _ => phoneNumberUtil.Format(_parsedPhoneNumber, PhoneNumberFormat.INTERNATIONAL)
+        };
     }
 }
