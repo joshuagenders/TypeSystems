@@ -1,7 +1,8 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using TypeSystems.Models;
 
-namespace TypeSystems;
+namespace TypeSystems.Converters;
 
 public class PhoneNumberConverter : JsonConverter<PhoneNumber>
 {

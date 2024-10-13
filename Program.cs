@@ -1,6 +1,4 @@
-﻿using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
-using TypeSystems;
+﻿using TypeSystems.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.MapType<PhoneNumber>(() => new OpenApiSchema { Type = "string", Example = new OpenApiPhoneNumber("+1234567890") });
+    c.MapType<PhoneNumber>(() => OpenApiPhoneNumber.Schema);
 });
 
 var app = builder.Build();
